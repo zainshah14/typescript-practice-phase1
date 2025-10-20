@@ -65,11 +65,11 @@ function printResults(results: CalculationResult) {
         return;
     }
 
-    for (const yeaEndResult of results) {
-        console.log(yeaEndResult.year);
-        console.log(`Total: ${yeaEndResult.totalAmount.toFixed(0)}`);
-        console.log(`Total Contributions: ${yeaEndResult.totalContributions.toFixed(0)}`);
-        console.log(`Total Interest Earned: ${yeaEndResult.totalInterestEarned.toFixed(0)}`);
+    for (const yearEndResult of results) {
+        console.log(yearEndResult.year);
+        console.log(`Total: ${yearEndResult.totalAmount.toFixed(0)}`);
+        console.log(`Total Contributions: ${yearEndResult.totalContributions.toFixed(0)}`);
+        console.log(`Total Interest Earned: ${yearEndResult.totalInterestEarned.toFixed(0)}`);
         console.log('------------------------')
     }
 }
