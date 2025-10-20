@@ -1,10 +1,8 @@
-"use strict";
 // data:
 // initial amount
 // annual contribution
 // expected return
 // duration
-Object.defineProperty(exports, "__esModule", { value: true });
 function calculateInvestment(data) {
     const { initialAmount, annualContribution, expectedReturn, duration } = data;
     if (initialAmount < 0) {
@@ -55,4 +53,3 @@ const investmentData = {
 };
 const results = calculateInvestment(investmentData);
 printResults(results);
-//# sourceMappingURL=calculator.js.map

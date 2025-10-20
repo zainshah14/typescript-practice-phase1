@@ -1,0 +1,25 @@
+{
+  "name": "ts-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc essentials-demo-project/calculator.ts --target ES2019 --module commonjs",
+    "start": "node essentials-demo-project/calculator.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zainshah14/typescript-practice-phase1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zainshah14/typescript-practice-phase1/issues"
+  },
+  "homepage": "https://github.com/zainshah14/typescript-practice-phase1#readme",
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
