@@ -23,7 +23,9 @@ function add(a: number, b: number) {
 //     return a * b;
 // };
 
-const mul = (a: number, b: number) => a * b;
+// const mul = (a: number, b: number) => a * b;
+
+const mul = (a: number, b: number = 1) => a * b;
 
 console.log(mul(2, 5));
 
@@ -39,4 +41,23 @@ if (button) {
     button.addEventListener('click', event => console.log(event));
 }
 
-printOutput(mul(5, 2));
+printOutput(mul(5));
+
+const hobbies = ['Sports', 'Cooking'];
+
+console.log(hobbies[0]);
+
+// const activeHobbies = ['Hiking'];
+const activeHobbies = ['Hiking', ...hobbies];
+
+// activeHobbies.push(hobbies[0], hobbies[1]);
+activeHobbies.push(...hobbies);
+
+const person = {
+    name: 'Max',
+    age : 30
+};
+
+// const copiedPerson = person; // copies the pointer of person in the memory, doesn't create an actual copy.
+
+const copiedPerson = { ...person }; // key: value pairs of person are added to this new object.
