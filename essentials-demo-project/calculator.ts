@@ -4,6 +4,7 @@
 // expected return
 // duration
 
+
 type InvestmentData = {
     initialAmount: number;
     annualContribution: number;
