@@ -9,10 +9,20 @@
 // }
 
 class UserT {
-    constructor(public name: string, public age: number) {}
+    // public hobbies: string[] = []
+    readonly hobbies: string[] = []
+
+    constructor(public name: string, private age: number) {}
+
+    greet() {
+        console.log('Me age: ' + this.age);
+    }
 }
 
 const max = new UserT('Max', 36);
 const fred = new UserT('Fred', 29);
+
+// max.hobbies.push('Sports');
+// max.hobbies = ['Sports'];
 
 console.log(max, fred);
