@@ -10,7 +10,7 @@
 // console.log(max.fullName);
 
 class UserB {
-    private _firstName: string;
+    protected _firstName: string;
     private _lastName: string;
 
     set firstName(name: string) {
@@ -57,5 +57,24 @@ class Employee extends UserB {
 
     work() {
         // ...
+        console.log(this._firstName);
     }
+}
+
+abstract class UIElement {
+    constructor(public identifier: string) {}
+
+    clone(targetLocation: string) {
+        // logic to duplicate the UI element.
+    }
+}
+
+// let uiElement = new UIElement(); // Can't do this.
+
+class SideDrawerElement extends UIElement {
+    constructor(public identifier: string, public position: 'left' | 'right') {
+        super(identifier);
+    }
+
+    // ...
 }
