@@ -1,4 +1,6 @@
-// const userName = 'Max';
+import { person } from "./namespace-example.js"
+
+    // const userName = 'Max';
 // // userName = 'Maxim'
 // let age = 30;
 
@@ -53,14 +55,13 @@ const activeHobbies = ['Hiking', ...hobbies];
 // activeHobbies.push(hobbies[0], hobbies[1]);
 activeHobbies.push(...hobbies);
 
-const person = {
-    FirstName: 'Max',
-    age : 30
-};
+
 
 // const copiedPerson = person; // copies the pointer of person in the memory, doesn't create an actual copy.
 
 const copiedPerson = { ...person }; // key: value pairs of person are added to this new object.
+
+console.log(copiedPerson);
 
 const add = (...numbers: number[]) => {
     return numbers.reduce((currentResult, currentValue) => {
@@ -75,9 +76,11 @@ console.log(addedNumbers);
 // const hobby2 = hobbies[1];
 
 const [hobby1, hobby2, ...remainingHobbies] = hobbies;
+console.log(remainingHobbies)
 
 console.log(hobbies, hobby1, hobby2);
 
 const { FirstName: userName, age } = person;
 
 console.log(userName, age, person)
+
