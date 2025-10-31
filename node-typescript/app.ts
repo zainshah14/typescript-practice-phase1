@@ -32,7 +32,7 @@ app.get('/health', (req: Request, res: Response) => {
 
 app.use(todoRoutes);
 
-app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error, req: Request, res: Response, _next: NextFunction) => {
     res.status(500).json({ message: 'An error occurred!' });
 });
 

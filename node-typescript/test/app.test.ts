@@ -58,4 +58,16 @@ it('DELETE /todos/:id → removes todo', async () => {
   const ids = listRes.body.todos.map((t: any) => t.id);
   expect(ids).not.toContain(id);
 });
+
+it('POST /todos (invalid) → 400', async () => {
+  // missing "text" entirely
+  const res1 = await request(app).post('/todos').send({});
+  expect(res1.status).toBe(400);
+  expect(res1.body).toHaveProperty('error');
+
+  // blank text
+  const res2 = await request(app).post('/todos').send({ text: '   ' });
+  expect(res2.status).toBe(400);
+  expect(res2.body).toHaveProperty('error');
+});
 });

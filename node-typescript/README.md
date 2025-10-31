@@ -22,3 +22,7 @@ Jest + ts-jest + SuperTest:
 - list todos
 - update todo
 - delete todo
+
+## Testing & Coverage
+- Run tests: `npm test`
+- Coverage report: `npm run coverage` → see summary in terminal and detailed HTML in `coverage/lcov-report/index.html`
