@@ -25,4 +25,37 @@ describe('API smoke tests', () => {
     expect(res.body).toHaveProperty('todos');
     expect(Array.isArray(res.body.todos)).toBe(true);
   });
+
+  it('PATCH /todos/:id → updates todo text', async () => {
+  // First create a todo to update
+  const createRes = await request(app)
+    .post('/todos')
+    .send({ text: 'old text' });
+  const id = createRes.body.todo.id;
+
+  // Now update it
+  const patchRes = await request(app)
+    .patch(`/todos/${id}`)
+    .send({ text: 'updated text' });
+
+  expect(patchRes.status).toBe(200);
+  expect(patchRes.body.todo.text).toBe('updated text');
+});
+
+it('DELETE /todos/:id → removes todo', async () => {
+  // Create a todo to delete
+  const createRes = await request(app)
+    .post('/todos')
+    .send({ text: 'to delete' });
+  const id = createRes.body.todo.id;
+
+  // Delete it
+  const delRes = await request(app).delete(`/todos/${id}`);
+  expect(delRes.status).toBe(200);
+
+  // Confirm it’s gone
+  const listRes = await request(app).get('/todos');
+  const ids = listRes.body.todos.map((t: any) => t.id);
+  expect(ids).not.toContain(id);
+});
 });
