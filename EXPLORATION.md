@@ -110,3 +110,72 @@ describe('math utils', () => {
 - Identify **3 high-logic modules in each active service** (RFQ, Terminal, OPUI) → propose unit test coverage
 - Analyze past production bugs → **retrofit missing unit tests** when feasible
 - Involve developers for shared testing ownership, supported by SDET/QA
+
+## API Testing – Deep Dive
+
+### 1. What Is API Testing?
+
+- Testing endpoints, request/response contracts, status codes, headers, and edge cases  
+- Ensures the “surface area” of backend logic is working independently of frontend  
+
+---
+
+### 2. Common Tools
+
+- **SuperTest** (JS/TS) – Great for HTTP assertions inside your Jest suite  
+- **Postman** – Manual exploration + collection sharing  
+- **Rest Assured** (Java), **Karate**, **Insomnia**, etc.  
+
+---
+
+### 3. Key Assertions
+
+- Status codes (`200`, `201`, `400`, `404`, etc.)  
+- Response shape (fields, types, nested schema)  
+- Headers (`Content-Type`, auth tokens)  
+- Idempotency / error scenarios (sending same request twice, invalid body)  
+
+---
+
+### 4. Types of API Tests
+
+- **Smoke**: Just check `GET /health` or root  
+- **CRUD**: Create → Read → Update → Delete  
+- **Auth flow**: Token-based / session based  
+- **Edge cases**: Missing fields, invalid input, big payloads  
+
+---
+
+### 5. Why It's Crucial for Us (BridgeLinx Context)
+
+- We have a distributed architecture → Supply, RFQ, Terminal, etc. all speak via APIs  
+- Fastest ROI: catches backend-breaking bugs before UI builds  
+- Helps unblock frontend team when real data isn't ready  
+
+---
+
+### 6. API Testing Patterns
+
+- Test **positive path** first (`happy path`) ✅  
+- Test **negative path** deliberately (bad input, missing auth) ❌  
+- Reset test DB state where possible (super important for automation)  
+
+---
+
+### 7. What We Built in Phase 1
+
+- Express API in TypeScript  
+- Jest + SuperTest setup:
+  - ✅ `GET /health`  
+  - ✅ `POST /todos`  
+  - ✅ `GET /todos`  
+  - ✅ `PUT /todos/:id`  
+  - ✅ `DELETE /todos/:id`  
+
+---
+
+### 8. Future Steps
+
+- Add mock DB or in-memory stores (`sqlite`, `ts-node`, etc.)  
+- Add negative tests for missing fields / invalid IDs  
+- Explore contract testing (`pact.io`) for frontend/backend sync  
