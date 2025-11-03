@@ -85,27 +85,27 @@ describe('math utils', () => {
 
 ### 6. Case Study: Phase 1 Implementation
 
-- Implemented **Jest-based unit tests** to validate core logic of insertion and retrieval in a sample CRUD API.
-- Hands-on introduction to key concepts:
-  - Mocking  
-  - Isolation  
-  - Dependency injection  
-  - Assertion style  
-- Established the foundation for further automation in future phases.
+- Implemented Jest-based unit tests to validate core logic of insertion and retrieval in a sample CRUD API.
+- Hands-on intro to:
+  - Mocking
+  - Isolation
+  - Dependency Injection
+  - Assertion style
+- This serves as a foundation for automation in later phases.
 
 ---
 
 ### 7. How Unit Testing Supports Phase 2
 
-- Forms the backbone of the **CI workflow** (e.g., via GitHub Actions)
-- Helps enforce the policy: **“no broken code gets merged”**
-- Reduces the need for manual QA on minor changes
-- Encourages developers to own and improve test coverage
+- Backbone of CI workflow (eventually GitHub Actions)
+- Enforces “no broken code gets merged”
+- Reduces manual QA for minor changes
+- Encourages higher test coverage ownership among devs
 
 ---
 
-### 8. Next Steps at BridgeLinx
+### 8. Suggested Next Steps at BridgeLinx
 
-- Identify **3 high-logic modules in each active service** (RFQ, Terminal, OPUI) → propose unit test coverage
-- Analyze past production bugs → **retrofit missing unit tests** when feasible
-- Involve developers for shared testing ownership, supported by SDET/QA
+- Identify 3 high-logic modules in each active service (RFQ, Terminal, OPUI) for unit test proposal
+- Retrofit unit tests in areas tied to past production bugs
+- Bring in dev support for test ownership with SDET/QA collaboration
