@@ -1,5 +1,7 @@
 ## Unit Testing – Deep Dive
 
+---
+
 ### 1. What Is Unit Testing?
 
 Unit testing is the process of verifying the smallest parts (or “units”) of a system — typically functions, methods, or classes — in isolation, without external dependencies.
@@ -32,12 +34,12 @@ These tests:
 
 ### 3. Tools for Unit Testing
 
-| Tool      | Language/Stack  | Why It Matters                                     |
-|-----------|-----------------|-----------------------------------------------------|
-| Jest      | TS/JS (ours)    | Zero-config, fast, snapshot & mock support          |
-| Mocha     | TS/JS           | Modular, flexible, requires setup                   |
-| JUnit     | Java            | Most popular for enterprise-level Java apps         |
-| pytest    | Python          | Feature-rich, readable, auto-discovery              |
+| Tool   | Language/Stack  | Why It Matters                                     |
+|--------|-----------------|-----------------------------------------------------|
+| Jest   | TS/JS (ours)    | Zero-config, fast, snapshot & mock support          |
+| Mocha  | TS/JS           | Modular, flexible, requires setup                   |
+| JUnit  | Java            | Most popular for enterprise-level Java apps         |
+| pytest | Python          | Feature-rich, readable, auto-discovery              |
 
 **In our Phase 1, we use:**
 
@@ -53,7 +55,7 @@ These tests:
 ✅ Use descriptive test names  
 ✅ Mock external dependencies  
 ✅ Keep tests fast — run before every commit  
-✅ Focus first on “critical paths” (billing, auth, validation)
+✅ Focus first on “critical paths” (billing, auth, validation)  
 
 ❌ Do not test frameworks  
 ❌ Avoid coupling tests to implementation detail  
@@ -72,29 +74,38 @@ describe('math utils', () => {
     expect(result).toBe(5);
   });
 });
-Good structure:
 
-✅ Arrange (initialize inputs)
+### Good Test Structure
 
-✅ Act (call the function)
+- ✅ **Arrange**: Initialize inputs
+- ✅ **Act**: Call the function
+- ✅ **Assert**: Check the output
 
-✅ Assert (check output)
+---
 
-6. Include In Our Case Study
-“In Phase 1, we implemented Jest-based unit tests to validate the core logic of insertion and retrieval in a sample CRUD API. This served as a hands-on intro to mocking, isolation, dependency injection, and assertion style — all foundational for automation in later phases.”
+### 6. Case Study: Phase 1 Implementation
 
-7. Unit Testing & Phase 2 Roadmap
-Unit tests are the backbone of the CI workflow (GitHub Actions, later).
+- Implemented **Jest-based unit tests** to validate core logic of insertion and retrieval in a sample CRUD API.
+- Hands-on introduction to key concepts:
+  - Mocking  
+  - Isolation  
+  - Dependency injection  
+  - Assertion style  
+- Established the foundation for further automation in future phases.
 
-Helps enforce “no broken code gets merged” policy
+---
 
-Reduces manual QA for every small change
+### 7. How Unit Testing Supports Phase 2
 
-Encourages devs to own test coverage
+- Forms the backbone of the **CI workflow** (e.g., via GitHub Actions)
+- Helps enforce the policy: **“no broken code gets merged”**
+- Reduces the need for manual QA on minor changes
+- Encourages developers to own and improve test coverage
 
-8. Next Steps (Specific to BridgeLinx)
-Identify 3 modules in each active service (e.g., RFQ, Terminal, OPUI) with a high logic load → propose unit coverage
+---
 
-Identify code hotspots from production bugs → retrofit unit tests where feasible
+### 8. Next Steps at BridgeLinx
 
-Loop in devs for ownership with SDET/QA support
+- Identify **3 high-logic modules in each active service** (RFQ, Terminal, OPUI) → propose unit test coverage
+- Analyze past production bugs → **retrofit missing unit tests** when feasible
+- Involve developers for shared testing ownership, supported by SDET/QA
