@@ -1,8 +1,6 @@
 ## 1. Unit Testing – Deep Dive
 
----
-
-### 1.1. What Is Unit Testing?
+### 1.1 What Is Unit Testing?
 
 Unit testing is the process of verifying the smallest parts (or “units”) of a system — typically functions, methods, or classes — in isolation, without external dependencies.
 
@@ -21,7 +19,7 @@ These tests:
 
 ---
 
-### 1.2. Why Unit Tests Matter (Especially for Us at BridgeLinx)
+### 1.2 Why Unit Tests Matter (Especially for Us at BridgeLinx)
 
 - Core business logic (e.g., pricing, eligibility rules, credit logic) must be correct.
 - We’ve historically faced bugs that would've been caught earlier with unit tests.
@@ -32,7 +30,7 @@ These tests:
 
 ---
 
-### 1.3. Tools for Unit Testing
+### 1.3 Tools for Unit Testing
 
 | Tool   | Language/Stack  | Why It Matters                                     |
 |--------|-----------------|-----------------------------------------------------|
@@ -49,7 +47,7 @@ These tests:
 
 ---
 
-### 1.4. Best Practices for Unit Testing
+### 1.4 Best Practices for Unit Testing
 
 ✅ One logical assertion per test  
 ✅ Use descriptive test names  
@@ -63,7 +61,7 @@ These tests:
 
 ---
 
-### 1.5. What a Good Unit Test Looks Like
+### 1.5 What a Good Unit Test Looks Like
 
 ```ts
 import { add } from '../utils/math';
@@ -84,7 +82,7 @@ describe('math utils', () => {
 
 ---
 
-### 1.6. Case Study: Phase 1 Implementation
+### 1.6 Case Study: Phase 1 Implementation
 
 - Implemented **Jest-based unit tests** to validate core logic of insertion and retrieval in a sample CRUD API.
 - Hands-on introduction to key concepts:
@@ -96,7 +94,7 @@ describe('math utils', () => {
 
 ---
 
-### 1.7. How Unit Testing Supports Phase 2
+### 1.7 How Unit Testing Supports Phase 2
 
 - Forms the backbone of the **CI workflow** (e.g., via GitHub Actions)
 - Helps enforce the policy: **“no broken code gets merged”**
@@ -105,7 +103,7 @@ describe('math utils', () => {
 
 ---
 
-### 1.8. Next Steps at BridgeLinx
+### 1.8 Next Steps at BridgeLinx
 
 - Identify **3 high-logic modules in each active service** (RFQ, Terminal, OPUI) → propose unit test coverage
 - Analyze past production bugs → **retrofit missing unit tests** when feasible
@@ -115,7 +113,7 @@ describe('math utils', () => {
 
 ## 2. API Testing – Deep Dive
 
-### 2.1. What Is API Testing?
+### 2.1 What Is API Testing?
 
 - Focuses on testing backend endpoints that don’t rely on a UI  
 - Verifies request/response payloads, status codes, headers, and core logic  
@@ -124,7 +122,7 @@ describe('math utils', () => {
 
 ---
 
-### 2.2. Why API Testing Matters
+### 2.2 Why API Testing Matters
 
 - Catches logic bugs early, before UI is built  
 - Helps validate integrations (e.g., third-party services, DB interactions)  
@@ -132,7 +130,7 @@ describe('math utils', () => {
 
 ---
 
-### 2.3. How to Test APIs
+### 2.3 How to Test APIs
 
 Use HTTP clients such as:
 
@@ -151,7 +149,7 @@ Use HTTP clients such as:
 
 ---
 
-### 2.4. Types of API Tests
+### 2.4 Types of API Tests
 
 - 🔹 **Smoke Tests**: `GET /health`  
 - 🔹 **CRUD Flows**: Create → Read → Update → Delete sequence  
@@ -161,7 +159,7 @@ Use HTTP clients such as:
 
 ---
 
-### 2.5. SuperTest + Jest Setup (BridgeLinx Example)
+### 2.5 SuperTest + Jest Setup (BridgeLinx Example)
 
 - Wrap Express app in `app.ts`  
 - Use `supertest(app)` to mock requests  
@@ -181,7 +179,7 @@ it('returns 200 on /health', async () => {
 
 ---
 
-### 2.6. When to Use API Testing at BridgeLinx?
+### 2.6 When to Use API Testing at BridgeLinx?
 
 - ✅ Build confidence in backend logic before frontend UI is ready  
 - ✅ Faster feedback cycles vs. end-to-end tests  
