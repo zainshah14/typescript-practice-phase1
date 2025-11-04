@@ -111,71 +111,80 @@ describe('math utils', () => {
 - Analyze past production bugs → **retrofit missing unit tests** when feasible
 - Involve developers for shared testing ownership, supported by SDET/QA
 
+---
+
 ## API Testing – Deep Dive
 
 ### 1. What Is API Testing?
 
-- Testing endpoints, request/response contracts, status codes, headers, and edge cases  
-- Ensures the “surface area” of backend logic is working independently of frontend  
+- Focuses on testing backend endpoints that don’t rely on a UI  
+- Verifies request/response payloads, status codes, headers, and core logic  
+- Ensures the backend behaves correctly under expected and edge-case scenarios  
+- Allows isolated testing of server functions before they are wired into the frontend  
 
 ---
 
-### 2. Common Tools
+### 2. Why API Testing Matters
 
-- **SuperTest** (JS/TS) – Great for HTTP assertions inside your Jest suite  
-- **Postman** – Manual exploration + collection sharing  
-- **Rest Assured** (Java), **Karate**, **Insomnia**, etc.  
+- Catches logic bugs early, before UI is built  
+- Helps validate integrations (e.g., third-party services, DB interactions)  
+- Forms the basis for reliable contract-based development between frontend and backend teams  
 
 ---
 
-### 3. Key Assertions
+### 3. How to Test APIs
 
-- Status codes (`200`, `201`, `400`, `404`, etc.)  
-- Response shape (fields, types, nested schema)  
-- Headers (`Content-Type`, auth tokens)  
-- Idempotency / error scenarios (sending same request twice, invalid body)  
+Use HTTP clients such as:
+
+- Postman  
+- Insomnia  
+- Automated tools like:
+  - `SuperTest` (JS/TS)  
+  - `Rest Assured` (Java)  
+
+**Send requests (GET, POST, PUT, DELETE) and assert on:**
+
+- ✅ Status Codes (200, 201, 404, 500 etc.)  
+- ✅ Body Structure & Data Types  
+- ✅ Authentication Flows  
+- ✅ Error Scenarios (invalid input, missing auth, rate limits)  
 
 ---
 
 ### 4. Types of API Tests
 
-- **Smoke**: Just check `GET /health` or root  
-- **CRUD**: Create → Read → Update → Delete  
-- **Auth flow**: Token-based / session based  
-- **Edge cases**: Missing fields, invalid input, big payloads  
+- 🔹 **Smoke Tests**: `GET /health`  
+- 🔹 **CRUD Flows**: Create → Read → Update → Delete sequence  
+- 🔹 **Authentication**: Token/session validation  
+- 🔹 **Negative Cases**: Missing or malformed inputs  
+- 🔹 **Integration Boundaries**: DB or other services connected  
 
 ---
 
-### 5. Why It's Crucial for Us (BridgeLinx Context)
+### 5. SuperTest + Jest Setup (BridgeLinx Example)
 
-- We have a distributed architecture → Supply, RFQ, Terminal, etc. all speak via APIs  
-- Fastest ROI: catches backend-breaking bugs before UI builds  
-- Helps unblock frontend team when real data isn't ready  
+- Wrap Express app in `app.ts`  
+- Use `supertest(app)` to mock requests  
+- Run tests in-memory without a live server  
+- Use `ts-jest` and `@types/supertest` for TypeScript support  
 
----
+**Example:**
 
-### 6. API Testing Patterns
+```ts
+import request from 'supertest';
+import { app } from '../app';
 
-- Test **positive path** first (`happy path`) ✅  
-- Test **negative path** deliberately (bad input, missing auth) ❌  
-- Reset test DB state where possible (super important for automation)  
-
----
-
-### 7. What We Built in Phase 1
-
-- Express API in TypeScript  
-- Jest + SuperTest setup:
-  - ✅ `GET /health`  
-  - ✅ `POST /todos`  
-  - ✅ `GET /todos`  
-  - ✅ `PUT /todos/:id`  
-  - ✅ `DELETE /todos/:id`  
+it('returns 200 on /health', async () => {
+  await request(app).get('/health').expect(200);
+});
+```
 
 ---
 
-### 8. Future Steps
+### 6. When to Use API Testing at BridgeLinx?
 
-- Add mock DB or in-memory stores (`sqlite`, `ts-node`, etc.)  
-- Add negative tests for missing fields / invalid IDs  
-- Explore contract testing (`pact.io`) for frontend/backend sync  
+- ✅ Build confidence in backend logic before frontend UI is ready  
+- ✅ Faster feedback cycles vs. end-to-end tests  
+- ✅ Covers 70–90% of core functionality (the “testing pyramid” principle)  
+- ✅ Critical layer before we scale user load or microservices
+
