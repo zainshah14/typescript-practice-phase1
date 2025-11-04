@@ -433,3 +433,85 @@ Build time, flake rate, coverage of critical paths, main-branch stability.
 5. Performance for known hotspots  
 6. Security scanning always-on  
 7. Resilience as we touch high-risk dependencies  
+
+---
+
+## 4. Socio-Technical Strategy (How We Roll Out Testing at BridgeLinx)
+
+**Purpose:**  
+Move from “tests in theory” → “tests in production” across teams, tools, timelines, workflows, and culture.
+
+---
+
+### 4.1 Objective
+
+Build testing maturity step-by-step — without disrupting delivery — so that each new layer of testing reduces risk, improves confidence, and earns adoption.
+
+---
+
+### 4.2 Principles of Introduction
+
+- **Start where the pain is highest**  
+  e.g., frequent regressions or slow manual QA cycles.
+
+- **Automate the boring, not the creative**  
+  Keep exploratory/manual for UX & edge empathy.
+
+- **Practice inside-out testing**  
+  Unit/API → Integration → E2E → Resilience/Performance.
+
+- **Own what you ship**  
+  Each squad runs its own tests as part of “definition of done.”
+
+- **Tooling follows workflow, not the other way around**  
+  CI/CD comes last after local confidence.
+
+---
+
+### 4.3 Proposed 3-Phase Rollout (BridgeLinx Context)
+
+> _PIP Phase 1 deliverables kick-start Phase A below._
+
+| Phase          | Scope                         | Owners             | Timeframe | Deliverable                                  |
+|----------------|-------------------------------|--------------------|-----------|----------------------------------------------|
+| **A. Foundation** | Unit + API + ESLint           | SDET + Backend     | Nov–Dec   | TS repo with lint, CRUD tests, GH Action     |
+| **B. Coverage**   | Integration + Minimal E2E     | SDET + UI + BE     | Jan–Feb   | Happy-path flows automated with seed data    |
+| **C. Confidence** | Contract + Load + Resilience  | BE + SRE + QA      | Mar+      | Performance baselines + schema contracts     |
+
+---
+
+### 4.4 What “Done” Looks Like in Each Phase
+
+- **Phase A** – You can push code + have green unit/API tests before merge  
+- **Phase B** – A teammate can deploy to staging and run full “quote creation → listing” test automatically  
+- **Phase C** – You can simulate 100+ users running RFQ flows and the system stays below p95 targets  
+
+---
+
+### 4.5 How We Scale the Practices
+
+- ✅ Reusable Test Helpers – create common factories for RFQ, quotation, users.  
+- ✅ Shared Seed Data – one script every service can use to bring up valid workflows.  
+- ✅ CI as Teaching Tool – PR-based test runs replace Slack pings/QA signoff.  
+- ✅ Champion Model – 1 owner per module teaches others (e.g. RFQ, Ops, Billing).  
+- ✅ Reporting – use one dashboard (tests + uptime + p95) → “single truth board.”  
+
+---
+
+### 4.6 Risks & Guards
+
+| Risk                          | Mitigation                                                     |
+|-------------------------------|----------------------------------------------------------------|
+| Flaky tests slow team         | Mark WIP tests `@skip`; CI only blocks on stable suite         |
+| Test debt grows over delivery | “Fix test debt first” rule during cycles                       |
+| Too many tools                | Start with Jest + SuperTest + Playwright → expand only if needed |
+| No one owns failures          | Create “on-call for quality” weekly rotation                   |
+
+---
+
+### 4.7 Adil’s Alignment Requirements
+
+- Must be practical for small team (we don’t over-engineer)  
+- Documentation must be simple enough to share in 1–2 Slack messages or short Notion pages  
+- SDET role should teach team, not gate team  
+- **Phase 1 close date: Nov 6 (Thu)** — final review + checklist alignment
