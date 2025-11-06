@@ -1,5 +1,3 @@
----
-
 ## 1. General
 
 ### 1.1 Testing Principles / Manifesto
