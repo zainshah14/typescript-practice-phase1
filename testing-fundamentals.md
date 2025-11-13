@@ -905,15 +905,3 @@ We now have:
 * A baseline to iterate as experience grows
 
 > Testing maturity isn’t a milestone — it’s a continuous, collaborative process.
-
----
-
-## Document Metadata
-
-| Item          | Value                                         |
-| ------------- | --------------------------------------------- |
-| Document Type | QA Exploration Knowledge Base                 |
-| Version       | 1.0 (Phase 1 Complete)                        |
-| Maintainer    | Zain Shah (QA/SDET)                           |
-| Reviewer      | Adil Aslam                                    |
-| Repo Path     | `/docs/testing-fundamentals/phase1/README.md` |
